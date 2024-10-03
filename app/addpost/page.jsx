@@ -46,11 +46,10 @@ export default function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    // Изчистване на съобщенията за грешка и успех при нова заявка
+    
     setSuccessMessage('')
     setErrorMessage('')
 
-    // Запис в Supabase
     const { data, error } = await supabase
       .from('posts')
       .insert([
@@ -67,12 +66,10 @@ export default function CreatePost() {
         }
       ])
 
-    // Проверка за грешки и показване на съобщение
     if (error) {
       setErrorMessage('Възникна грешка при създаването на обявата. Моля, опитайте отново.')
     } else {
       setSuccessMessage('Обявата е създадена успешно!')
-      // Нулиране на формуляра
       setFormData({
         title: '',
         type: '',
@@ -97,11 +94,9 @@ export default function CreatePost() {
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold text-sky-900 text-center mb-8">Създайте Нова Обява</h1>
         
-        {/* Съобщения за грешка и успех */}
         {successMessage && <p className="text-green-600 text-center mb-4">{successMessage}</p>}
         {errorMessage && <p className="text-red-600 text-center mb-4">{errorMessage}</p>}
 
-        {/* Форма за създаване на обява */}
         <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="title">
@@ -131,8 +126,8 @@ export default function CreatePost() {
               required
             >
               <option value="">Изберете тип</option>
-              <option value="Dental">Дентална Медицина</option>
-              <option value="Medical">Хуманна Медицина</option>
+              <option value="Дентална Медицина">Дентална Медицина</option>
+              <option value="Хуманна Медицина">Хуманна Медицина</option>
             </select>
           </div>
           <div className="mb-4">
@@ -264,7 +259,7 @@ export default function CreatePost() {
           <div className="flex items-center justify-between">
             <button
               className="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-              type="submit"
+              type="button"
               onClick={() => setIsModalOpen(true)}
             >
               Създайте Обява

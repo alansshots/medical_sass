@@ -21,13 +21,13 @@ export default function LandingPage() {
               <div className="space-x-4">
                 <Link href={'/posts'}>
                   <button className="bg-sky-800 text-white text-lg py-3 px-6 rounded-full inline-flex items-center">
-                    Намери Услуга
+                    Намери
                     <ChevronRight className="ml-2" size={20} />
                   </button>
                 </Link>
                 {/* <Link> */}
                   <button className="border border-sky-800 text-sky-800 text-lg py-3 px-6 rounded-full inline-flex items-center">
-                    Предложи Услуга
+                    Предложи
                     <ChevronRight className="ml-2" size={20} />
                   </button>
                 {/* </Link> */}
