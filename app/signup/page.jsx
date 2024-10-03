@@ -71,6 +71,7 @@ export default function SignUp() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-sky-900">Създайте вашия акаунт</h2>
+          <p className='text-sky-700 text-center mt-2'>Ако си студент и се нуждаеш от клинична практика направи регистация и намери успешно пациенти сега. </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSignUp}>
           <input type="hidden" name="remember" value="true" />

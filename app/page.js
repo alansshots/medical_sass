@@ -38,7 +38,7 @@ export default function LandingPage() {
 
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-sky-900 mb-8 text-center">Партниращи Медицински Училища</h2>
+            <h2 className="text-3xl font-bold text-sky-900 mb-8 text-center">Студенти от тези университети използват платформата</h2>
             <div className="flex flex-wrap justify-center items-center gap-8">
               {[1, 2, 3, 4, 5].map((num) => (
                 <div key={num} className="bg-sky-50 p-4 rounded-2xl shadow-md">

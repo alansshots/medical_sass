@@ -32,6 +32,7 @@ export default function CreatePost() {
   const router = useRouter();
   const [successMessage, setSuccessMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [formErrors, setFormErrors] = useState({})
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -43,12 +44,37 @@ export default function CreatePost() {
     }))
   }
 
+  const validateForm = () => {
+    const errors = {}
+    // Required field validations
+    if (!formData.title) errors.title = 'Заглавието е задължително.'
+    if (!formData.type) errors.type = 'Типът е задължителен.'
+    if (!formData.description) errors.description = 'Описание е задължително.'
+    if (!formData.location) errors.location = 'Локацията е задължителна.'
+    if (!formData.provider) errors.provider = 'Името е задължително.'
+    if (!formData.school) errors.school = 'Университетът е задължителен.'
+    if (!formData.phone) errors.phone = 'Телефонният номер е задължителен.'
+    if (!formData.email) errors.email = 'Имейлът е задължителен.'
+    // Email format validation
+    if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Въведете валиден имейл.'
+    }
+    
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0 // returns true if no errors
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     
     setSuccessMessage('')
     setErrorMessage('')
+    
+    if (!validateForm()) {
+      setLoading(false)
+      return // Stop submission if there are validation errors
+    }
 
     const { data, error } = await supabase
       .from('posts')
@@ -85,8 +111,8 @@ export default function CreatePost() {
       setTimeout(() => {
         router.push('/posts');
       }, 3000);
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   return (
@@ -97,13 +123,13 @@ export default function CreatePost() {
         {successMessage && <p className="text-green-600 text-center mb-4">{successMessage}</p>}
         {errorMessage && <p className="text-red-600 text-center mb-4">{errorMessage}</p>}
 
-        <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+        <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="title">
               Заглавие
             </label>
             <input
-              className="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={`shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.title ? 'border-red-500' : ''}`}
               id="title"
               type="text"
               placeholder="Въведете заглавие"
@@ -112,13 +138,15 @@ export default function CreatePost() {
               onChange={handleChange}
               required
             />
+            {formErrors.title && <p className="text-red-500 text-xs italic">{formErrors.title}</p>}
           </div>
+
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="type">
               Тип
             </label>
             <select
-              className="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={`shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.type ? 'border-red-500' : ''}`}
               id="type"
               name="type"
               value={formData.type}
@@ -129,13 +157,15 @@ export default function CreatePost() {
               <option value="Дентална Медицина">Дентална Медицина</option>
               <option value="Хуманна Медицина">Хуманна Медицина</option>
             </select>
+            {formErrors.type && <p className="text-red-500 text-xs italic">{formErrors.type}</p>}
           </div>
+
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="description">
               Описание
             </label>
             <textarea
-              className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={`shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.description ? 'border-red-500' : ''}`}
               id="description"
               placeholder="Въведете описание"
               name="description"
@@ -144,7 +174,9 @@ export default function CreatePost() {
               rows={4}
               required
             />
+            {formErrors.description && <p className="text-red-500 text-xs italic">{formErrors.description}</p>}
           </div>
+
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="location">
               Локация
@@ -152,7 +184,7 @@ export default function CreatePost() {
             <div className="relative">
               <MapPin className="absolute left-3 top-2 text-sky-500" size={20} />
               <input
-                className="shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.location ? 'border-red-500' : ''}`}
                 id="location"
                 type="text"
                 placeholder="Въведете локация (град / адрес)"
@@ -161,8 +193,10 @@ export default function CreatePost() {
                 onChange={handleChange}
                 required
               />
+              {formErrors.location && <p className="text-red-500 text-xs italic">{formErrors.location}</p>}
             </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="provider">
               Име
@@ -170,7 +204,7 @@ export default function CreatePost() {
             <div className="relative">
               <User className="absolute left-3 top-2 text-sky-500" size={20} />
               <input
-                className="shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.provider ? 'border-red-500' : ''}`}
                 id="provider"
                 type="text"
                 placeholder="Въведете вашето пълно име"
@@ -179,29 +213,32 @@ export default function CreatePost() {
                 onChange={handleChange}
                 required
               />
+              {formErrors.provider && <p className="text-red-500 text-xs italic">{formErrors.provider}</p>}
             </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="school">
               Университет
             </label>
-            <div className="relative">
-              <School className="absolute left-3 top-2 text-sky-500" size={20} />
-              <select
-                className="shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="school"
-                name="school"
-                value={formData.school}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Изберете университет</option>
-                {schoolOptions.map((school, index) => (
-                  <option key={index} value={school}>{school}</option>
-                ))}
-              </select>
-            </div>
+            <select
+              className={`shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.school ? 'border-red-500' : ''}`}
+              id="school"
+              name="school"
+              value={formData.school}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Изберете университет</option>
+              {schoolOptions.map((school) => (
+                <option key={school} value={school}>
+                  {school}
+                </option>
+              ))}
+            </select>
+            {formErrors.school && <p className="text-red-500 text-xs italic">{formErrors.school}</p>}
           </div>
+
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="phone">
               Телефон
@@ -209,17 +246,19 @@ export default function CreatePost() {
             <div className="relative">
               <Phone className="absolute left-3 top-2 text-sky-500" size={20} />
               <input
-                className="shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.phone ? 'border-red-500' : ''}`}
                 id="phone"
-                type="tel"
+                type="text"
                 placeholder="Въведете телефонен номер"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 required
               />
+              {formErrors.phone && <p className="text-red-500 text-xs italic">{formErrors.phone}</p>}
             </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="email">
               Имейл
@@ -227,20 +266,22 @@ export default function CreatePost() {
             <div className="relative">
               <Mail className="absolute left-3 top-2 text-sky-500" size={20} />
               <input
-                className="shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.email ? 'border-red-500' : ''}`}
                 id="email"
                 type="email"
-                placeholder="Въведете валиден имейл"
+                placeholder="Въведете вашия имейл"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
               />
+              {formErrors.email && <p className="text-red-500 text-xs italic">{formErrors.email}</p>}
             </div>
           </div>
-          <div className="mb-6">
+
+          <div className="mb-4">
             <label className="block text-sky-700 text-sm font-bold mb-2" htmlFor="facebook">
-              Facebook
+              Facebook (по желание)
             </label>
             <div className="relative">
               <Facebook className="absolute left-3 top-2 text-sky-500" size={20} />
@@ -248,7 +289,7 @@ export default function CreatePost() {
                 className="shadow appearance-none border rounded-full w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="facebook"
                 type="text"
-                placeholder="Въведете URL на Facebook профил"
+                placeholder="Въведете вашия Facebook профил"
                 name="facebook"
                 value={formData.facebook}
                 onChange={handleChange}
@@ -256,40 +297,16 @@ export default function CreatePost() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <button
-              className="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={() => setIsModalOpen(true)}
+              type="submit"
+              className={`bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={loading}
             >
-              Създайте Обява
+              {loading ? 'Създаване...' : 'Създаване на обява'}
             </button>
           </div>
         </form>
-            
-        {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center text-black bg-gray-600 bg-opacity-50">
-            <div className="bg-white p-8 rounded shadow-md text-center">
-              <h3 className="text-lg font-semibold mb-4">Потвърдете публикацията</h3>
-              <p>Сигурни ли сте, че искате да публикувате?</p>
-              <div className="mt-6 flex justify-center space-x-4">
-                <button
-                  onClick={handleSubmit}
-                  className="bg-sky-600 text-white py-2 px-4 rounded-md"
-                >
-                  {loading ? 'Зареждане...' : 'Да'}
-                </button>
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="bg-red-600 text-white py-2 px-4 rounded-md"
-                >
-                  Не
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
       </div>
     </div>
   )

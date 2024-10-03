@@ -33,7 +33,10 @@ const Navbar = () => {
       <header className="bg-sky-50 py-6 border-b-2 border-gray-300">
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between">
-            <a href='/' className="text-2xl font-bold text-sky-800">MedConnect</a>
+            <div className='text-sky-800'>
+            <a href='/' className="text-2xl font-bold text-sky-800">MedConnect |</a>
+            <a href="/posts" className='ml-2'>Публикации</a>
+            </div>
             <div className="flex flex-row items-center justify-center">
               {user ? (
                 <>

@@ -99,7 +99,7 @@ export default function SignIn() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
                 id="remember-me"
@@ -117,7 +117,7 @@ export default function SignIn() {
                 Забравена парола?
               </a>
             </div>
-          </div>
+          </div> */}
 
           {error && <p className="text-sm text-red-600">{error}</p>}
 
