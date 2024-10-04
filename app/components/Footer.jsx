@@ -6,9 +6,9 @@ const Footer = () => {
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2024 UniklinikBG. Всички права запазени.</p>
           <div className="mt-4 space-x-4">
-            <a href='/' className="text-white hover:underline">Privacy Policy</a>
-            <a href='/' className="text-white hover:underline">Terms of Service</a>
-            <a href='/' className="text-white hover:underline">Contact Us</a>
+            <a href='/privacypolicy' className="text-white hover:underline">Privacy Policy</a>
+            <a href='/termsandconditions' className="text-white hover:underline">Terms of Service</a>
+            {/* <a href='/' className="text-white hover:underline">Contact Us</a> */}
           </div>
         </div>
       </footer>

@@ -47,7 +47,7 @@ export default function LandingPage() {
                 Свързване на студенти и пациенти за дентална грижа под наблюдението на специалисти.
               </h1>
               <p className="text-xl text-sky-700 mb-8">
-                UniklinikaBG улеснява намирането на достъпна дентална и медицинска грижа, предоставяйки възможност на студенти да придобият опит. 
+                UniklinikBG улеснява намирането на достъпна дентална и медицинска грижа, предоставяйки възможност на студенти да придобият опит. 
               </p>
               <div className="flex flex-row sm:flex-row ">
                 <Link href="/posts" passHref>
@@ -73,7 +73,7 @@ export default function LandingPage() {
         {/* Why Us Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">UniklinikaBG Предлага</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">UniklinikBG Предлага</h2>
             <div className="grid md:grid-cols-3 gap-12">
               {[
                 { icon: Users, title: "Проверени студенти", description: "Всички студенти в латформата изучават дентална или хуманна медицина." },

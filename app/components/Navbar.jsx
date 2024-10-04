@@ -37,7 +37,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between">
             <Link href="/" className="text-2xl font-bold text-sky-800">
-              UniklinikaBG
+              UniklinikBG
             </Link>
 
             {/* Desktop Menu */}
