@@ -1,17 +1,31 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Search, Users, Shield, Star, ChevronRight, ArrowRight } from 'lucide-react'
 
+import LogoMUPleven from '../app/assets/images/Logo_MU_Pleven.png';
+import LogoMUPlovdiv from '../app/assets/images/Logo_MU_Plovdiv.png';
+import LogoMUSofia from '../app/assets/images/Logo_MU_Sofia.png';
+import LogoMUSZ from '../app/assets/images/Logo_MU_SZ.png';
+import LogoMUVarn from '../app/assets/images/Logo_MU_Varna.png';
+
+const universityLogos = {
+  "Medical University - Pleven": LogoMUPleven,
+  "Medical University - Plovdiv": LogoMUPlovdiv,
+  "Medical University - Sofia": LogoMUSofia,
+  "Medical University - SZ": LogoMUSZ,
+  "Medical University - Varna": LogoMUVarn,
+};
+
 const universities = [
+  "Medical University - Pleven",
   "Medical University - Plovdiv",
   "Medical University - Sofia",
-  "Harvard Medical School",
-  "Johns Hopkins School of Medicine",
-  "Stanford School of Medicine",
-  "Yale School of Medicine",
-]
+  "Medical University - SZ",
+  "Medical University - Varna"
+];
 
 const testimonials = [
   { name: "Dr. Emily Chen", role: "Student", quote: "MedConnect has been invaluable for my practical training.", rating: 5 },
@@ -30,21 +44,26 @@ export default function LandingPage() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="md:w-2/3">
               <h1 className="text-4xl md:text-6xl font-bold text-sky-900 mb-6">
-                Connecting Students and Patients for Quality Care
+                Свързване на студенти и пациенти за дентална грижа под наблюдението на специалисти.
               </h1>
               <p className="text-xl text-sky-700 mb-8">
-                MedConnect bridges the gap between medical education and affordable healthcare, 
-                providing supervised care by verified students.
+                UniklinikaBG улеснява намирането на достъпна дентална и медицинска грижа, предоставяйки възможност на студенти да придобият опит. 
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <button className="bg-sky-600 text-white px-8 py-3 rounded-full hover:bg-sky-700 transition-colors flex items-center justify-center">
-                  Find a Service
-                  <Search className="ml-2" size={20} />
-                </button>
-                <button className="bg-white text-sky-600 px-8 py-3 rounded-full hover:bg-sky-100 transition-colors flex items-center justify-center border border-sky-600">
-                  Offer a Service
-                  <Users className="ml-2" size={20} />
-                </button>
+                <Link href="/posts" passHref>
+                  <button className="bg-sky-600 text-white px-8 py-3 rounded-full hover:bg-sky-700 transition-colors flex items-center justify-center">
+                    Намери
+                    <Search className="ml-2" size={20} />
+                  </button>
+                </Link>
+
+                {/* Link for "Предложи" Button */}
+                <Link href="/signup" passHref>
+                  <button className="bg-white text-sky-600 px-8 py-3 rounded-full hover:bg-sky-100 transition-colors flex items-center justify-center border border-sky-600">
+                    Предложи
+                    <Users className="ml-2" size={20} />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -54,12 +73,12 @@ export default function LandingPage() {
         {/* Why Us Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">Why Choose MedConnect?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">UniklinikaBG Предлага</h2>
             <div className="grid md:grid-cols-3 gap-12">
               {[
-                { icon: Users, title: "Verified Students", description: "All our students are rigorously vetted and trained." },
-                { icon: Shield, title: "Professional Supervision", description: "Every procedure is overseen by licensed professionals." },
-                { icon: Star, title: "Affordable Care", description: "Quality healthcare at a fraction of the usual cost." },
+                { icon: Users, title: "Проверени студенти", description: "Всички студенти в латформата изучават дентална или хуманна медицина." },
+                { icon: Shield, title: "Професионално наблюдение", description: "Всяка процедура се контролира от квалифицирани специалисти." },
+                { icon: Star, title: "Достъпни здравни услуги", description: "Медицинско обслужване за част от обичайната цена." },
               ].map((feature, index) => (
                 <motion.div 
                   key={index}
@@ -82,7 +101,7 @@ export default function LandingPage() {
         {/* Testimonials and Reviews Section */}
         <section className="py-20 bg-sky-100">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">What People Are Saying</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">Отзиви от потребители</h2>
             <div className="relative">
               <div className="overflow-hidden">
                 <motion.div
@@ -94,13 +113,13 @@ export default function LandingPage() {
                   className="flex flex-col md:flex-row items-center"
                 >
                   <div className="md:w-1/3 mb-6 md:mb-0">
-                    <Image
-                      src={`/placeholder.svg?text=${testimonials[activeTestimonial].name}`}
+                    {/* <Image
+                      
                       alt={testimonials[activeTestimonial].name}
                       width={200}
                       height={200}
                       className="rounded-full mx-auto"
-                    />
+                    /> */}
                   </div>
                   <div className="md:w-2/3 md:pl-12">
                     <p className="text-xl text-sky-800 mb-4">"{testimonials[activeTestimonial].quote}"</p>
@@ -128,11 +147,11 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-
+              
         {/* Universities Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">Our Partner Universities</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-sky-900 mb-12 text-center">Студенти от тези университети предлагат медицинска и денталнa грижа</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
               {universities.map((university, index) => (
                 <motion.div
@@ -142,11 +161,11 @@ export default function LandingPage() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <Image
-                    src={`/placeholder.svg?text=${university.split(' ').join('+')}`}
-                    alt={university}
-                    width={150}
-                    height={60}
-                    className="max-h-16 w-auto"
+                    src={universityLogos[university]} 
+                    alt={university} 
+                    width={200}
+                    height={100}
+                    className="max-h-20 w-auto"
                   />
                 </motion.div>
               ))}
@@ -155,15 +174,15 @@ export default function LandingPage() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-20 bg-sky-50">
+        {/* <section className="py-20 bg-sky-50">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">How It Works</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">К</h2>
             <div className="relative">
               <div className="hidden md:block absolute left-1/2 top-0 bottom-0 border-l-2 border-sky-200"></div>
               {[
-                { title: "Sign Up", description: "Create your account as a student or patient." },
-                { title: "Find or Offer Services", description: "Browse available services or list your skills." },
-                { title: "Connect", description: "Match with the right student or patient for your needs." },
+                { title: "Регистрирай се ", description: "Създай акаунт и предложи дентална или медицинска грижа." },
+                { title: "Свържи се с Пациенти", description: "Свържи се с пациенти търсещи съответната грижа." },
+                { title: "", description: "Match with the right student or patient for your needs." },
                 { title: "Receive Care", description: "Get quality, supervised care at affordable rates." },
               ].map((step, index) => (
                 <motion.div
@@ -184,13 +203,13 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Call to Action */}
-        <section className="py-20 bg-sky-600 text-white">
+        {/* <section className="py-20 bg-sky-600 text-white">
           <div className="container mx-auto px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
-            <p className="text-xl mb-8">Join MedConnect today and be part of the future of healthcare education and affordable care.</p>
+            <p className="text-xl mb-8">Присъединете се към UniklinikaBG днес и станете част от.</p>
             <motion.button
               className="bg-white text-sky-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-sky-100 transition-colors inline-flex items-center"
               whileHover={{ scale: 1.05 }}
@@ -200,7 +219,7 @@ export default function LandingPage() {
               <ArrowRight className="ml-2" size={20} />
             </motion.button>
           </div>
-        </section>
+        </section> */}
       </main>
 
     </div>

@@ -34,7 +34,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between">
             <div className='text-sky-800'>
-            <a href='/' className="text-2xl font-bold text-sky-800">MedConnect |</a>
+            <a href='/' className="text-2xl font-bold text-sky-800">UniklinikaBG |</a>
             <a href="/posts" className='ml-2'>Публикации</a>
             </div>
             <div className="flex flex-row items-center justify-center">
