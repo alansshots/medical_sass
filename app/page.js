@@ -28,7 +28,7 @@ const universities = [
 ];
 
 const testimonials = [
-  { name: "Dr. Emily Chen", role: "Student", quote: "MedConnect has been invaluable for my practical training.", rating: 5 },
+  { name: "", role: "Student", quote: "MedConnect has been invaluable for my practical training.", rating: 5 },
   { name: "John Smith", role: "Patient", quote: "I received excellent care at an affordable price.", rating: 5 },
   { name: "Sarah Johnson", role: "Student", quote: "The supervision and real-world experience are unmatched.", rating: 4 },
 ]
@@ -40,7 +40,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-sky-50 font-sans">
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-20 md:py-32">
+        <section className="relative overflow-hidden py-10 md:py-32">
           <div className="container mx-auto px-6 relative z-10">
             <div className="md:w-2/3">
               <h1 className="text-4xl md:text-6xl font-bold text-sky-900 mb-6">
@@ -49,17 +49,17 @@ export default function LandingPage() {
               <p className="text-xl text-sky-700 mb-8">
                 UniklinikaBG улеснява намирането на достъпна дентална и медицинска грижа, предоставяйки възможност на студенти да придобият опит. 
               </p>
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+              <div className="flex flex-row sm:flex-row ">
                 <Link href="/posts" passHref>
-                  <button className="bg-sky-600 text-white px-8 py-3 rounded-full hover:bg-sky-700 transition-colors flex items-center justify-center">
+                  <button className="bg-sky-600  mx-1 text-white px-8 py-3 rounded-full hover:bg-sky-700 transition-colors flex items-center justify-center">
                     Намери
                     <Search className="ml-2" size={20} />
                   </button>
                 </Link>
 
                 {/* Link for "Предложи" Button */}
-                <Link href="/signup" passHref>
-                  <button className="bg-white text-sky-600 px-8 py-3 rounded-full hover:bg-sky-100 transition-colors flex items-center justify-center border border-sky-600">
+                <Link href="/signup" passHref >
+                  <button className="bg-white mx-1 text-sky-600 px-8 py-3 rounded-full hover:bg-sky-100 transition-colors flex items-center justify-center border border-sky-600">
                     Предложи
                     <Users className="ml-2" size={20} />
                   </button>
@@ -99,7 +99,7 @@ export default function LandingPage() {
         </section>
 
         {/* Testimonials and Reviews Section */}
-        <section className="py-20 bg-sky-100">
+        {/* <section className="py-20 bg-sky-100">
           <div className="container mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-12 text-center">Отзиви от потребители</h2>
             <div className="relative">
@@ -113,13 +113,6 @@ export default function LandingPage() {
                   className="flex flex-col md:flex-row items-center"
                 >
                   <div className="md:w-1/3 mb-6 md:mb-0">
-                    {/* <Image
-                      
-                      alt={testimonials[activeTestimonial].name}
-                      width={200}
-                      height={200}
-                      className="rounded-full mx-auto"
-                    /> */}
                   </div>
                   <div className="md:w-2/3 md:pl-12">
                     <p className="text-xl text-sky-800 mb-4">"{testimonials[activeTestimonial].quote}"</p>
@@ -146,7 +139,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
               
         {/* Universities Section */}
         <section className="py-20 bg-white">
