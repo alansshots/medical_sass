@@ -9,14 +9,14 @@ import LogoMUPleven from '../app/assets/images/Logo_MU_Pleven.png';
 import LogoMUPlovdiv from '../app/assets/images/Logo_MU_Plovdiv.png';
 import LogoMUSofia from '../app/assets/images/Logo_MU_Sofia.png';
 import LogoMUSZ from '../app/assets/images/Logo_MU_SZ.png';
-import LogoMUVarn from '../app/assets/images/Logo_MU_Varna.png';
+// import LogoMUVarn from '../app/assets/images/Logo_MU_Varna.png';
 
 const universityLogos = {
   "Medical University - Pleven": LogoMUPleven,
   "Medical University - Plovdiv": LogoMUPlovdiv,
   "Medical University - Sofia": LogoMUSofia,
   "Medical University - SZ": LogoMUSZ,
-  "Medical University - Varna": LogoMUVarn,
+  // "Medical University - Varna": LogoMUVarn,
 };
 
 const universities = [
@@ -24,7 +24,7 @@ const universities = [
   "Medical University - Plovdiv",
   "Medical University - Sofia",
   "Medical University - SZ",
-  "Medical University - Varna"
+  // "Medical University - Varna"
 ];
 
 const testimonials = [
