@@ -43,7 +43,7 @@ const Navbar = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-4">
               <Link href="/posts" className="text-sky-800 hover:text-sky-600 transition-colors duration-200">
-                Публикации
+                Обяви
               </Link>
               {user ? (
                 <>
